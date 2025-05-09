@@ -16,9 +16,6 @@ public class ShoulderMovement {
         shoulder = hardwareMap.get(DcMotorEx.class, "shoulder");
         shoulder.setDirection(TeleOpParameters.SHOULDER_DIRECTION);
         shoulder.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        shoulder.setTargetPosition(0);
-        shoulder.setPower(1.0);
-        shoulder.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
 
     public class ShoulderUp implements Action {

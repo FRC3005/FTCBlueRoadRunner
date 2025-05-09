@@ -9,14 +9,14 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import org.firstinspires.ftc.teamcode.MecanumDrive;
 
-@Autonomous(name = "4 Basket Auto", group = "Autonomous")
+@Autonomous(name = "Spec Auto", group = "Autonomous")
 public class Spec3 extends LinearOpMode {
 
     private MecanumDrive drive; // Declare drive as an instance variable
 
     @Override
     public void runOpMode() throws InterruptedException {
-        Pose2d initialPose = new Pose2d(0, -62, Math.toRadians(0));
+        Pose2d initialPose = new Pose2d(0, -62, Math.toRadians(90));
         drive = new MecanumDrive(hardwareMap, initialPose); // Initialize drive
 
         waitForStart();
@@ -47,7 +47,7 @@ public class Spec3 extends LinearOpMode {
     }
 
     private TrajectoryActionBuilder Clipping1() {
-        return drive.actionBuilder(new Pose2d(-23, -62, Math.toRadians(0)))
+        return drive.actionBuilder(new Pose2d(-23, -62, Math.toRadians(90)))
                 .strafeTo(new Vector2d(0, -30));     //Clipped the first one
 
     }

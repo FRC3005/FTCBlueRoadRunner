@@ -21,7 +21,7 @@ public class Basket extends LinearOpMode {
 
     @Override
     public void runOpMode() throws InterruptedException {
-        Pose2d initialPose = new Pose2d(0, -62, Math.toRadians(90));
+        Pose2d initialPose = new Pose2d(-23, -62, Math.toRadians(0));
         drive = new MecanumDrive(hardwareMap, initialPose); // Initialize drive
         shoulderMovement = new ShoulderMovement(hardwareMap);
         elbowMovement = new ElbowMovement(hardwareMap);
@@ -36,27 +36,28 @@ public class Basket extends LinearOpMode {
     private void executeAutonomous() {
         // Define trajectories
         TrajectoryActionBuilder path1 = basket1();
-        TrajectoryActionBuilder path2 = basket2get(path1);
-        TrajectoryActionBuilder path3 = basket2score(path2);
-        TrajectoryActionBuilder path4 = basket3get(path3);
-        TrajectoryActionBuilder path5 = basket3score(path4);
-        TrajectoryActionBuilder path6 = basket4get(path5);
-        TrajectoryActionBuilder path7 = basket4score(path6);
+  //      TrajectoryActionBuilder path2 = basket2get(path1);
+    //    TrajectoryActionBuilder path3 = basket2score(path2);
+      //  TrajectoryActionBuilder path4 = basket3get(path3);
+        //TrajectoryActionBuilder path5 = basket3score(path4);
+        //TrajectoryActionBuilder path6 = basket4get(path5);
+        //TrajectoryActionBuilder path7 = basket4score(path6);
 
         Actions.runBlocking(
                 new SequentialAction(
                         path1.build(),
                         new ParallelAction(
                                 shoulderMovement.shoulderToPosition(2000),
-                                elbowMovement.elbowToPosition(0)
+                                elbowMovement.elbowToPosition(-500)
                         ),
-                        intakeControl.intakeOut(),
-                        path2.build(),
-                        path3.build(),
-                        path4.build(),
-                        path5.build(),
-                        path6.build(),
-                        path7.build()
+                        intakeControl.intakeIn(),
+                        intakeControl.intakeStop()
+          //              path2.build(),
+            //            path3.build(),
+              //          path4.build(),
+                //        path5.build(),
+                  //      path6.build(),
+                    //    path7.build()
                 )
         );
     }
@@ -67,39 +68,39 @@ public class Basket extends LinearOpMode {
                 .turn(Math.toRadians(49));
     }
 
-    private TrajectoryActionBuilder basket2get(TrajectoryActionBuilder previousPath) {
-        return previousPath.endTrajectory().fresh()
-                .strafeTo(new Vector2d(-34, -35))
-                .turn(Math.toRadians(100));
+  //  private TrajectoryActionBuilder basket2get(TrajectoryActionBuilder previousPath) {
+  //      return previousPath.endTrajectory().fresh()
+  //              .strafeTo(new Vector2d(-34, -35))
+  //              .turn(Math.toRadians(100));
     }
 
-    private TrajectoryActionBuilder basket2score(TrajectoryActionBuilder previousPath) {
-        return previousPath.endTrajectory().fresh()
-                .strafeTo(new Vector2d(-60, -58))
-                .turn(Math.toRadians(-100));
-    }
+ //   private TrajectoryActionBuilder basket2score(TrajectoryActionBuilder previousPath) {
+ //       return previousPath.endTrajectory().fresh()
+ //               .strafeTo(new Vector2d(-60, -58))
+ //               .turn(Math.toRadians(-100));
+ //   }
 
-    private TrajectoryActionBuilder basket3get(TrajectoryActionBuilder previousPath) {
-        return previousPath.endTrajectory().fresh()
-                .strafeTo(new Vector2d(-43, -31))
-                .turn(Math.toRadians(100));
-    }
+  //  private TrajectoryActionBuilder basket3get(TrajectoryActionBuilder previousPath) {
+   //     return previousPath.endTrajectory().fresh()
+        //        .strafeTo(new Vector2d(-43, -31))
+  //              .turn(Math.toRadians(100));
+ //   }
 
-    private TrajectoryActionBuilder basket3score(TrajectoryActionBuilder previousPath) {
-        return previousPath.endTrajectory().fresh()
-                .strafeTo(new Vector2d(-60, -58))
-                .turn(Math.toRadians(-100));
-    }
+   // private TrajectoryActionBuilder basket3score(TrajectoryActionBuilder previousPath) {
+     //   return previousPath.endTrajectory().fresh()
+       //         .strafeTo(new Vector2d(-60, -58))
+         //       .turn(Math.toRadians(-100));
+   // }
 
-    private TrajectoryActionBuilder basket4get(TrajectoryActionBuilder previousPath) {
-        return previousPath.endTrajectory().fresh()
-                .strafeTo(new Vector2d(-47, -26))
-                .turn(Math.toRadians(130));
-    }
+    //private TrajectoryActionBuilder basket4get(TrajectoryActionBuilder previousPath) {
+      //  return previousPath.endTrajectory().fresh()
+        //        .strafeTo(new Vector2d(-47, -26))
+          //      .turn(Math.toRadians(130));
+    //}
 
-    private TrajectoryActionBuilder basket4score(TrajectoryActionBuilder previousPath) {
-        return previousPath.endTrajectory().fresh()
-                .strafeTo(new Vector2d(-60, -58))
-                .turn(Math.toRadians(-130));
-    }
-}
+    //private TrajectoryActionBuilder basket4score(TrajectoryActionBuilder previousPath) {
+      //  return previousPath.endTrajectory().fresh()
+        //        .strafeTo(new Vector2d(-60, -58))
+          //      .turn(Math.toRadians(-130));
+    //}
+//}

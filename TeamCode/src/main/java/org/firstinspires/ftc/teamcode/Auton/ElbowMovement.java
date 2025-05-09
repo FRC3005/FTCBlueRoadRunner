@@ -3,8 +3,8 @@ package org.firstinspires.ftc.teamcode.Auton;
 import androidx.annotation.NonNull;
 import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
 import com.acmerobotics.roadrunner.Action;
-import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 public class ElbowMovement {
@@ -12,10 +12,8 @@ public class ElbowMovement {
 
     public ElbowMovement(HardwareMap hardwareMap) {
         elbow = hardwareMap.get(DcMotorEx.class, "elbow");
-        elbow.setDirection(DcMotor.Direction.FORWARD); // Adjust if needed
+        elbow.setDirection(DcMotorEx.Direction.FORWARD); // Adjust if needed
         elbow.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        elbow.setPower(1.0);
-        elbow.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
 
     public class ElbowToPosition implements Action {
@@ -31,16 +29,16 @@ public class ElbowMovement {
             if (!initialized) {
                 elbow.setTargetPosition(targetPosition);
                 elbow.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                elbow.setPower(1.0);
+                elbow.setPower(1.0); // Set power to move
                 initialized = true;
             }
             int currentPos = elbow.getCurrentPosition();
             packet.put("Elbow Position", currentPos);
             if (elbow.isBusy()) {
-                return true; // still moving
+                return true; // Still moving
             } else {
-                elbow.setPower(0);
-                return false; // movement complete
+                elbow.setPower(0); // Stop the motor
+                return false; // Movement complete
             }
         }
     }

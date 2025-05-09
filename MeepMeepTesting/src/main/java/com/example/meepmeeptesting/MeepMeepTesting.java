@@ -15,36 +15,9 @@ public class MeepMeepTesting {
                 .setConstraints(60, 60, Math.toRadians(180), Math.toRadians(180), 100)
                 .build();
 
-        myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(0, -62, Math.toRadians(90)))
-                .strafeTo(new Vector2d(0, -30))                 //Clipped the first one
-
-                .strafeTo(new Vector2d(0, -40)) //Started pushing 2 In
-                .splineToLinearHeading(new Pose2d(35, -34, Math.toRadians(0)), 0)
-                .strafeTo(new Vector2d(35, -9))
-                .strafeTo(new Vector2d(45, -9))
-                .strafeTo(new Vector2d(45, -48))
-                .splineToLinearHeading(new Pose2d(56, -9, Math.toRadians(0)), 0)
-                .strafeTo(new Vector2d(56, -48))
-                .strafeTo(new Vector2d(40, -48))
-                .turn(Math.toRadians(-90)) //Finished pushing 2 in and ready to start clipping
-
-                .strafeTo(new Vector2d(40, -62)) //Got the first one
-                .strafeTo(new Vector2d(0, -50)) //Leaving after getting the speci
-                .turn(Math.toRadians(180))
-                .strafeTo(new Vector2d(0, -32)) //At the bar to score the speci
-                .strafeTo(new Vector2d(0, -35))
-                .strafeTo(new Vector2d(40, -48)) //Back to get a second one
-                        .turn(Math.toRadians(180))
-                .strafeTo(new Vector2d(40, -62)) //Picking up a second one
-
-
-
-
-
-
-
-
-
+        myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(-23, -62, Math.toRadians(0)))
+                .strafeTo(new Vector2d(-60, -58))
+                .turn(Math.toRadians(49))
 
                 .build());
 
