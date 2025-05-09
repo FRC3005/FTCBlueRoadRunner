@@ -33,9 +33,9 @@ public class MeepMeepTesting {
                 .turn(Math.toRadians(180))
                 .strafeTo(new Vector2d(0, -32)) //At the bar to score the speci
                 .strafeTo(new Vector2d(0, -35))
-                .strafeTo(new Vector2d(40, -48))
+                .strafeTo(new Vector2d(40, -48)) //Back to get a second one
                         .turn(Math.toRadians(180))
-                .strafeTo(new Vector2d(40, -62))
+                .strafeTo(new Vector2d(40, -62)) //Picking up a second one
 
 
 

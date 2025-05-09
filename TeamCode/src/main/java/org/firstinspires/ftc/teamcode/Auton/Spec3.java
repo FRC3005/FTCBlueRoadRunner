@@ -26,13 +26,13 @@ public class Spec3 extends LinearOpMode {
 
     private void executeAutonomous() {
         // Define trajectories
-        TrajectoryActionBuilder path1 = basket1();
-        TrajectoryActionBuilder path2 = basket2get(path1);
-        TrajectoryActionBuilder path3 = basket2score(path2);
-        TrajectoryActionBuilder path4 = basket3get(path3);
-        TrajectoryActionBuilder path5 = basket3score(path4);
-        TrajectoryActionBuilder path6 = basket4get(path5);
-        TrajectoryActionBuilder path7 = basket4score(path6);
+        TrajectoryActionBuilder path1 = Clipping1();
+        TrajectoryActionBuilder path2 = PushingIn(path1);
+        TrajectoryActionBuilder path3 = Clipping2(path2);
+        TrajectoryActionBuilder path4 = pickingup2(path3);
+
+
+
 
 
 
@@ -41,52 +41,40 @@ public class Spec3 extends LinearOpMode {
                 new SequentialAction(
                         path1.build(),
                         path2.build(),
-                        path3.build(),
-                        path4.build(),
-                        path5.build(),
-                        path6.build(),
-                        path7.build()
+                        path3.build()
                 )
         );
     }
 
-    private TrajectoryActionBuilder basket1() {
+    private TrajectoryActionBuilder Clipping1() {
         return drive.actionBuilder(new Pose2d(-23, -62, Math.toRadians(0)))
-                .strafeTo(new Vector2d(-60, -58))
-                .turn(Math.toRadians(49));
+                .strafeTo(new Vector2d(0, -30));     //Clipped the first one
+
     }
 
-    private TrajectoryActionBuilder basket2get(TrajectoryActionBuilder previousPath) {
+    private TrajectoryActionBuilder PushingIn(TrajectoryActionBuilder previousPath) {
         return previousPath.endTrajectory().fresh()
-                .strafeTo(new Vector2d(-34, -35))
-                .turn(Math.toRadians(100));
+                .strafeTo(new Vector2d(0, -40)) //Started pushing 2 In
+                .splineToLinearHeading(new Pose2d(35, -34, Math.toRadians(0)), 0)
+                .strafeTo(new Vector2d(35, -9))
+                .strafeTo(new Vector2d(45, -9))
+                .strafeTo(new Vector2d(45, -48))
+                .splineToLinearHeading(new Pose2d(56, -9, Math.toRadians(0)), 0)
+                .strafeTo(new Vector2d(56, -48))
+                .strafeTo(new Vector2d(40, -48))
+                .turn(Math.toRadians(-90)); //Finished pushing 2 in and ready to start clipping
     }
 
-    private TrajectoryActionBuilder basket2score(TrajectoryActionBuilder previousPath){
+    private TrajectoryActionBuilder Clipping2(TrajectoryActionBuilder previousPath){
         return previousPath.endTrajectory().fresh()
-                .strafeTo(new Vector2d(-60, -58))
-                .turn(Math.toRadians(-100));
+                .strafeTo(new Vector2d(40, -62)) //Got the first one
+                .strafeTo(new Vector2d(0, -50)) //Leaving after getting the speci
+                .turn(Math.toRadians(180))
+                .strafeTo(new Vector2d(0, -32)); //At the bar to score the speci
     }
-    private TrajectoryActionBuilder basket3get(TrajectoryActionBuilder previousPath) {
+    private TrajectoryActionBuilder pickingup2(TrajectoryActionBuilder previousPath) {
         return previousPath.endTrajectory().fresh()
-                .strafeTo(new Vector2d(-43, -31))
-                .turn(Math.toRadians(100));
-    }
-    private TrajectoryActionBuilder basket3score(TrajectoryActionBuilder previousPath) {
-        return previousPath.endTrajectory().fresh()
-                .strafeTo(new Vector2d(-60, -58))
-                .turn(Math.toRadians(-100));
-    }
-    private TrajectoryActionBuilder basket4get(TrajectoryActionBuilder previousPath) {
-        return previousPath.endTrajectory().fresh()
-                .strafeTo(new Vector2d(-47, -26))
-                .turn(Math.toRadians(130));
-    }
-    private TrajectoryActionBuilder basket4score(TrajectoryActionBuilder previousPath) {
-        return previousPath.endTrajectory().fresh()
-                .strafeTo(new Vector2d(-60, -58))
-                .turn(Math.toRadians(-130));
-    }
+                .strafeTo(new Vector2d(40, -62)); //Picking up a second one
 
-
+    }
 }
