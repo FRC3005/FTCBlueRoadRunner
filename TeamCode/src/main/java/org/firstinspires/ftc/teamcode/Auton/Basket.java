@@ -39,7 +39,13 @@ public class Basket extends LinearOpMode {
 
         Actions.runBlocking(
                 new SequentialAction(
-                        path1.build()
+                        path1.build(),
+                        path2.build(),
+                        path3.build(),
+                        path4.build(),
+                        path5.build(),
+                        path6.build(),
+                        path7.build()
                 )
         );
     }
